@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reporte de Pagos Pendientes - AGUAS PARAÍSO</title>
+  <link rel="stylesheet" href="/administracion.css">
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <ul class="nav-menu">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="#">Servicios</a></li>
+        <li><a href="#">Tarifas</a></li>
+        <li><a href="#">Sucursal virtual</a></li>
+        <li><a href="admin-panel.html">Panel de administración</a></li>
+        <li><a href="#" class="active">Reporte de pagos pendientes</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="contenido">
+    <h1>Reporte de Pagos Pendientes</h1>
+    <p>Listado de usuarios con facturas vencidas para gestión de cobros y recordatorios.</p>
+
+    <!-- Filtros -->
+    <section class="filtros">
+      <form id="filtroForm">
+        <label for="estado">Estado:</label>
+        <select id="estado" name="estado">
+          <option value="pendiente">Pendiente</option>
+          <option value="pagada">Pagada</option>
+        </select>
+
+        <label for="fecha">Fecha de vencimiento:</label>
+        <input type="date" id="fecha" name="fecha" />
+
+        <button type="submit">Filtrar</button>
+      </form>
+    </section>
+
+    <!-- Tabla de reporte -->
+    <table class="tabla-facturas">
+      <thead>
+        <tr>
+          <th>Usuario</th>
+          <th># Factura</th>
+          <th>Fecha vencimiento</th>
+          <th>Valor</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Juan Pérez</td>
+          <td>FCT-2025-010</td>
+          <td>15/11/2025</td>
+          <td>$50.000</td>
+          <td class="pendiente">Pendiente</td>
+        </tr>
+        <tr>
+          <td>María Gómez</td>
+          <td>FCT-2025-011</td>
+          <td>20/11/2025</td>
+          <td>$47.000</td>
+          <td class="pendiente">Pendiente</td>
+        </tr>
+        <tr>
+          <td>Carlos López</td>
+          <td>FCT-2025-012</td>
+          <td>25/11/2025</td>
+          <td>$52.500</td>
+          <td class="pendiente">Pendiente</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Exportar -->
+    <button id="exportarBtn">📊 Exportar a Excel</button>
+    <div id="mensajeExport"></div>
+  </main>
+
+  <footer class="footer">
+    <p>📱 WhatsApp: Miguel Eduardo Hernández - 3105301220</p>
+    <p>📧 Correo: David Felipe Valencia - <a href="mailto:dvalenciabetancur@gmail.com">dvalenciabetancur@gmail.com</a></p>
+  </footer>
+
+  <script>
+    const exportarBtn = document.getElementById('exportarBtn');
+    const mensajeExport = document.getElementById('mensajeExport');
+
+    exportarBtn.addEventListener('click', () => {
+      mensajeExport.textContent = "✅ Exportación a Excel realizada (simulado).";
+    });
+
+    const filtroForm = document.getElementById('filtroForm');
+    filtroForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      mensajeExport.textContent = "🔍 Filtro aplicado (simulado).";
+    });
+  </script>
+
+</body>
+</html>

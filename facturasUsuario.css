@@ -1,0 +1,109 @@
+.tabla-facturas {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+  background-color: #FFFFFF;
+  color: #0033A0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.tabla-facturas th,
+.tabla-facturas td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.tabla-facturas thead {
+  background-color: #00AEC7;
+  color: #FFFFFF;
+}
+
+.tabla-facturas .pagada {
+  color: green;
+  font-weight: bold;
+}
+
+.tabla-facturas .pendiente {
+  color: red;
+  font-weight: bold;
+}
+
+.auth {
+  margin-top: 30px;
+  background-color: #FFFFFF;
+  color: #0033A0;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.auth h2 {
+  margin-bottom: 15px;
+}
+
+.auth input, .auth button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.auth button {
+  background-color: #00AEC7;
+  color: #FFFFFF;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.auth button:hover {
+  background-color: #007a99;
+}
+
+#authMsg {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.tablero {
+  margin-top: 40px;
+}
+
+.cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1;
+  min-width: 250px;
+  background-color: #E3E829;
+  color: #0033A0;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.card h3 {
+  margin-bottom: 10px;
+}
+
+.card button {
+  background-color: #0033A0;
+  color: #FFFFFF;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.card button:hover {
+  background-color: #4EC3E0;
+  color: #0033A0;
+}

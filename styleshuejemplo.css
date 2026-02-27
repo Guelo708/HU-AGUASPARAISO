@@ -1,0 +1,59 @@
+/* estilos.css */
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f0f8ff;
+  padding: 40px;
+}
+
+h1 {
+  color: #0077b6;
+}
+
+form {
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 8px;
+  max-width: 500px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+input,
+select,
+button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #0077b6;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #005f8a;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+  display: none;
+}
+
+.success {
+  color: green;
+  font-size: 1em;
+  margin-top: 20px;
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Panel de Administración - AGUAS PARAÍSO</title>
+  <link rel="stylesheet" href="/administracion.css">
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <ul class="nav-menu">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="#">Servicios</a></li>
+        <li><a href="#">Tarifas</a></li>
+        <li><a href="#">Sucursal virtual</a></li>
+        <li><a href="#" class="active">Panel de administración</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="contenido">
+    <h1>Panel de Administración</h1>
+    <p>Gestione usuarios, tarifas y consumos desde este tablero central.</p>
+
+    <!-- Simulación de autenticación de dos factores -->
+    <section class="auth">
+      <h2>Autenticación de dos factores</h2>
+      <form id="authForm">
+        <label for="codigo">Ingrese el código enviado a su correo:</label>
+        <input type="text" id="codigo" name="codigo" required />
+        <button type="submit">Validar acceso</button>
+        <div id="authMsg"></div>
+      </form>
+    </section>
+
+    <!-- Tablero administrativo -->
+    <section class="tablero" id="tablero" style="display:none;">
+      <h2>Gestión del sistema</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Usuarios</h3>
+          <p>Crear, editar y eliminar usuarios.</p>
+          <button>Gestionar usuarios</button>
+        </div>
+        <div class="card">
+          <h3>Tarifas</h3>
+          <p>Actualizar tarifas vigentes.</p>
+          <button>Gestionar tarifas</button>
+        </div>
+        <div class="card">
+          <h3>Consumos</h3>
+          <p>Registrar y consultar lecturas de consumo.</p>
+          <button>Gestionar consumos</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>📱 WhatsApp: Miguel Eduardo Hernández - 3105301220</p>
+    <p>📧 Correo: David Felipe Valencia - <a href="mailto:dvalenciabetancur@gmail.com">dvalenciabetancur@gmail.com</a></p>
+  </footer>
+
+  <script>
+    const form = document.getElementById('authForm');
+    const msg = document.getElementById('authMsg');
+    const tablero = document.getElementById('tablero');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const codigo = document.getElementById('codigo').value;
+      if(codigo === "123456"){ // Simulación de código válido
+        msg.textContent = "✅ Acceso concedido";
+        tablero.style.display = "block";
+        form.style.display = "none";
+      } else {
+        msg.textContent = "❌ Código incorrecto";
+      }
+    });
+  </script>
+
+</body>
+</html>

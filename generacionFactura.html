@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Generar Facturas - AGUAS PARAÍSO</title>
+  <link rel="stylesheet" href="/pagosLinea.css">
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <ul class="nav-menu">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="#">Servicios</a></li>
+        <li><a href="#">Tarifas</a></li>
+        <li><a href="#" class="active">Generar facturas</a></li>
+        <li><a href="#">Sucursal virtual</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="contenido">
+    <h1>Generación automática de facturas</h1>
+    <p>Como administrador, puedes generar las facturas mensuales con base en el consumo y las tarifas vigentes.</p>
+
+    <form id="facturaForm">
+      <label for="mes">Mes de facturación:</label>
+      <select id="mes" name="mes" required>
+        <option value="">Seleccione un mes</option>
+        <option value="01">Enero</option>
+        <option value="02">Febrero</option>
+        <option value="03">Marzo</option>
+        <option value="04">Abril</option>
+        <option value="05">Mayo</option>
+        <option value="06">Junio</option>
+        <option value="07">Julio</option>
+        <option value="08">Agosto</option>
+        <option value="09">Septiembre</option>
+        <option value="10">Octubre</option>
+        <option value="11">Noviembre</option>
+        <option value="12">Diciembre</option>
+      </select>
+
+      <label for="anio">Año:</label>
+      <input type="number" id="anio" name="anio" min="2020" max="2100" required />
+
+      <button type="submit">Generar facturas</button>
+      <div class="success" id="mensajeExito"></div>
+    </form>
+  </main>
+
+  <footer class="footer">
+    <p>📱 WhatsApp: Miguel Eduardo Hernández - 3105301220</p>
+    <p>📧 Correo: David Felipe Valencia - <a href="mailto:dvalenciabetancur@gmail.com">dvalenciabetancur@gmail.com</a></p>
+  </footer>
+
+  <script>
+    const form = document.getElementById('facturaForm');
+    const mensaje = document.getElementById('mensajeExito');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const mes = document.getElementById('mes').value;
+      const anio = document.getElementById('anio').value;
+
+      if (mes && anio) {
+        mensaje.textContent = `✅ Facturas de ${mes}/${anio} generadas automáticamente (simulado).`;
+        form.reset();
+      }
+    });
+  </script>
+
+</body>
+</html>
