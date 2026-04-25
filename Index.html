@@ -7,14 +7,23 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <form action="">
-      <label for="">Usuario</label>
-      <input placeholder="Usuario" type="text">
-      <label for="">Contraseña</label>
-      <input placeholder="Contraseña" type="password" name="" id="">
-      <input class="boton"  type="button" value="Iniciar Sesión">
-      
 
+  <script type="module" src="/scriptFormularioPagos.js"></script>
+<form action="">
+  <h1>Regístrese para pagar su factura</h1>
+  
+  <label for="usuario">Usuario</label>
+  <input id="usuario" placeholder="Usuario" type="text">
+  
+  <label for="clave">Contraseña</label>
+  <input id="clave" placeholder="Contraseña" type="password">
+  <br>
+  <!-- Área para mensajes dinámicos -->
+  <div id="mensaje"></div>
+  
+  <input class="boton" type="button" value="Iniciar Sesión">
+</form>
     </form>
+    
 </body>
 </html>
