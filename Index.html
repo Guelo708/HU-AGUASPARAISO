@@ -9,21 +9,23 @@
 <body>
 
   <script type="module" src="/scriptFormularioPagos.js"></script>
-<form action="">
+<form>
   <h1>Regístrese para pagar su factura</h1>
-  
+
   <label for="usuario">Usuario</label>
-  <input id="usuario" placeholder="Usuario" type="text">
-  
+  <input id="usuario" type="text">
+
   <label for="clave">Contraseña</label>
-  <input id="clave" placeholder="Contraseña" type="password">
-  <br>
-  <!-- Área para mensajes dinámicos -->
+  <input id="clave" type="password">
+
+  <!-- Mensaje principal -->
   <div id="mensaje"></div>
-  
+
+  <!-- Contenedor para el párrafo adicional -->
+  <div id="extra"></div>
+
+  <!-- Botón siempre abajo -->
   <input class="boton" type="button" value="Iniciar Sesión">
 </form>
-    </form>
-    
 </body>
 </html>

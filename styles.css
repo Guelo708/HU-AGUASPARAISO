@@ -14,12 +14,16 @@ body {
 }
 
 form {
-    width: 500px;
-    height: 500px;
-    background-color: #4EC3E0;
-    margin-left: 32%;
-    margin-top: 13%;
-    padding: 4%;
+  width: 500px;
+  height: 600px;              /* altura más grande */
+  background-color: #4EC3E0;
+  margin: 5% auto;
+  padding: 4%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* botón siempre abajo */
+
 }
 label{
     background-color: #4EC3E0;
@@ -59,4 +63,25 @@ input{
 
 #mensaje.blocked {
   color: red;
+}
+
+.alerta-suave {
+  margin-top: 8px;
+  padding: 10px;
+  background-color: #f0f0f0;   /* fondo gris claro */
+  border: 1px solid #ccc;      /* borde suave */
+  border-radius: 5px;          /* esquinas redondeadas */
+  font-size: 14px;
+  color: #031743;              /* tono azul oscuro de tu paleta */
+  text-align: center;
+}
+
+.aviso {
+  margin-top: 40px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #0033A0;             /* azul de tu paleta */
+  text-align: center;
+  background: none;           /* sin fondo */
+  border: none;               /* sin borde */
 }
