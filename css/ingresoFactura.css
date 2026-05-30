@@ -101,15 +101,18 @@ button{
 }
 
 #btnGuardar{
-    background:#27ae60;
+    background:#0033A0;
+    ;
 }
 
 #btnActualizar{
-    background:#f39c12;
+  background-color: #FFE946;
+
 }
 
 #btnEliminar{
-    background:#e74c3c;
+    background:#3498db;
+    ;
 }
 
 table{
