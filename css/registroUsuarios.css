@@ -106,15 +106,18 @@ input[type="password"] {
 }
 
 #btnGuardar {
-    background: #00c853;
+    background:#0033A0;
+    
 }
 
 #btnActualizar {
-    background: #ff9800;
+    background:#0033A0;
+
 }
 
 #btnEliminar {
-    background: #f44336;
+    background:#0033A0;
+
 }
 
 .btn-seleccionar {

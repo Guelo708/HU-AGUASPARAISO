@@ -36,19 +36,14 @@ async function cargarUsuarios() {
         const nombre = document.createElement("h3");
         nombre.textContent = usuario.nombre;
 
-        // Botones de acción
+        // Botón de acción (solo eliminar)
         const acciones = document.createElement("div");
         acciones.classList.add("acciones");
-
-        const btnActualizar = document.createElement("button");
-        btnActualizar.textContent = "Actualizar";
-        btnActualizar.classList.add("btnActualizar");
 
         const btnEliminar = document.createElement("button");
         btnEliminar.textContent = "Eliminar";
         btnEliminar.classList.add("btnEliminar");
 
-        acciones.appendChild(btnActualizar);
         acciones.appendChild(btnEliminar);
 
         cardFront.appendChild(img);
@@ -79,19 +74,18 @@ async function cargarUsuarios() {
         cardInner.appendChild(cardBack);
         card.appendChild(cardInner);
 
-     
         // Evento de clic para girar
-card.addEventListener("click", (e) => {
-  // Evita que los botones disparen el flip
-  if (!e.target.classList.contains("btnActualizar") && !e.target.classList.contains("btnEliminar")) {
-    card.classList.toggle("flipped");
-  }
-
+        card.addEventListener("click", (e) => {
+          if (!e.target.classList.contains("btnEliminar")) {
+            card.classList.toggle("flipped");
+          }
         });
 
-        // Eventos de acción
-        btnActualizar.addEventListener("click", () => mostrarFormularioActualizar(usuario));
-        btnEliminar.addEventListener("click", () => eliminarUsuario(usuario.id));
+        // Evento de eliminar
+        btnEliminar.addEventListener("click", (e) => {
+          e.stopPropagation();
+          eliminarUsuario(usuario.id);
+        });
 
         resultado.appendChild(card);
       });
@@ -105,61 +99,7 @@ card.addEventListener("click", (e) => {
 
 document.getElementById("btnCargar").addEventListener("click", cargarUsuarios);
 
-// --- NUEVAS FUNCIONES ---
-
-function mostrarFormularioActualizar(usuario) {
-  const contenedor = document.getElementById("contenedorAcciones");
-  contenedor.innerHTML = `
-    <h3>Actualizar Usuario</h3>
-    <form id="formActualizar">
-      <input type="hidden" id="idUsuario" value="${usuario.id}">
-      <label>Nombre:</label>
-      <input type="text" id="nuevoNombre" value="${usuario.nombre}">
-      <label>Correo:</label>
-      <input type="email" id="nuevoCorreo" value="${usuario.correo}">
-      <label>Celular:</label>
-      <input type="text" id="nuevoCelular" value="${usuario.celular}">
-      <button type="submit">Guardar cambios</button>
-    </form>
-  `;
-
-  console.log("Formulario de actualización renderizado para:", usuario);
-
-  // Capturar el formulario recién creado
-  const form = document.getElementById("formActualizar");
-
-  // Enganchar el evento de submit
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault(); // evita reload
-
-    console.log("Submit detectado, enviando PUT...");
-
-    try {
-      const respuesta = await fetch(`https://6a13aada6c7db8aac0534233.mockapi.io/api/v1/usuarios/${usuario.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          nombre: document.getElementById("nuevoNombre").value,
-          correo: document.getElementById("nuevoCorreo").value,
-          celular: document.getElementById("nuevoCelular").value
-        })
-      });
-
-      if (!respuesta.ok) throw new Error("Error en la actualización");
-
-      alert("Usuario actualizado correctamente");
-      cargarUsuarios(); // refresca la lista
-      contenedor.innerHTML = ""; // limpia el formulario
-    } catch (error) {
-      alert("Error al actualizar usuario");
-      console.error(error);
-    }
-  });
-}
-
-
-
-
+// --- FUNCIÓN ELIMINAR ---
 async function eliminarUsuario(id) {
   if (confirm("¿Seguro que deseas eliminar este usuario?")) {
     try {
