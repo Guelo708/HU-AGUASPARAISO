@@ -5,7 +5,7 @@ const contraseñaCorrecta = "guelo708";
 let intentos = 0;
 
 // Referencias al DOM
-const botonLogin = document.querySelector(".boton");
+const botonLogin = document.querySelector("#btnLogin");
 const campoUsuario = document.getElementById("usuario");
 const campoClave = document.getElementById("clave");
 const mensaje = document.getElementById("mensaje");

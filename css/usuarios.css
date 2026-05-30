@@ -1,0 +1,190 @@
+body {
+    background-color: #007a99; /* fondo institucional */
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Contenedor en grid flexible con separación moderada */
+#resultado {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px; /* separación más estética */
+    margin-top: 20px;
+}
+
+/* Tarjeta con efecto flip */
+.card {
+    perspective: 1000px;
+    height: 280px; /* altura mayor para correos largos */
+    overflow: hidden;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Frente y reverso */
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 12px; /* bordes redondeados */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    background-color: #E3E829;
+    color: #0033A0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box; /* asegura que padding no corte contenido */
+}
+
+/* Frente: avatar + nombre */
+.card-front {
+    flex-direction: column;
+}
+
+.card-front img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: 3px solid #00AEC7;
+}
+
+.card-front h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Reverso con fondo turquesa institucional */
+.card-back {
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+    border-radius: 12px;
+    background-color: #00AEC7; /* turquesa institucional */
+    color: #FFFFFF;            /* texto blanco para contraste */
+    padding: 12px;             /* menos padding para ahorrar espacio */
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    height: 100%;              /* mantiene la altura de la tarjeta */
+}
+
+/* Texto en negrita */
+.card-back p {
+    margin: 1px 0;             /* menos espacio entre líneas */
+    font-size: 0.45rem;
+    font-weight: bold;
+    line-height: 1.0;          /* interlineado más compacto */
+    white-space: normal;
+    word-break: break-word; 
+}
+
+/* Colores específicos para celular y correo */
+.card-back p.celular {
+    color: #0033A0; /* azul institucional */
+}
+
+.card-back p.correo {
+    color: #0033A0; /* azul institucional */
+    font-size: 0.95rem; /* correo más pequeño para que siempre quepa */
+}
+
+
+
+.card-back p .label {
+    font-weight: bold;   /* solo la etiqueta va en negrita */
+}
+
+.card-back p .valor {
+    font-weight: normal; /* el dato se mantiene normal */
+    color: #FFFFFF;      /* blanco para contraste */
+}
+
+.card-back p.celular .valor,
+.card-back p.correo .valor {
+    color: #0033A0;      /* azul institucional para destacar */
+    font-size: 1.02rem;   /* más pequeño para que siempre quepa */
+}
+
+
+
+
+/* Hover moderno */
+.card-inner:hover {
+    box-shadow: 0 12px 20px rgba(0,0,0,0.4);
+    transform: scale(1.05);
+}
+
+/* Estilo del título principal */
+h1 {
+    margin-top: 100px;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #FFFFFF; /* blanco para contraste sobre fondo azul */
+    margin-bottom: 20px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Botón institucional */
+#btnCargar {
+    display: block;
+    margin: 0 auto; /* centrar */
+    background-color: #0033A0; /* azul institucional */
+    color: #FFFFFF;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px; /* bordes redondeados */
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Hover del botón */
+#btnCargar:hover {
+    background-color: #FFFFFF; /* celeste institucional */
+    color: #0033A0;            /* texto azul */
+    transform: scale(1.05);    /* efecto de “levantar” */
+}
+
+/* Mensaje cuando no hay usuarios */
+#resultado p {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 40px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Variante en blanco */
+#resultado p.vacio-blanco {
+    color: #FFFFFF; /* blanco institucional */
+}
+
+/* Variante en amarillo */
+#resultado p.vacio-amarillo {
+    color: #E3E829; /* amarillo institucional */
+}
+
+
+
+

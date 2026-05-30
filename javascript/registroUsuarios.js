@@ -94,46 +94,7 @@ function procesarRegistro() {
     limpiarFormulario();
 }
 
-// ========== FUNCIÓN DE LOGIN ==========
-// Esta función se ejecuta cuando el usuario hace clic en el botón de registrarse. Si el formulario tiene campos de nombre y email, se procesa como un registro. Si no, se procesa como un login.
 
-// si el usuario ha superado el nunmero maximo de intentos este se bloquea y muestra el mensaje
-    function procesarLogin() {
-    if (bloqueado) {
-        mostrarBloqueo();
-        return;
-    }
-
-    // limpoia los resultados anteriores cada vez que se intenta iniciar sesión, para mostrar solo el mensaje actual
-    areaResultados.innerHTML = '';
-    // Obtener valores de los elementos del DOM y eliminar espacios con trim
-    const usuario = inputUsuario.value.trim();
-    const password = inputPassword.value.trim();
-
-    // Validar que no estén vacíos
-    if (!usuario || !password) {
-        mostrarError('Por favor, ingresa usuario y contraseña');
-        return;
-    }
-
-    // Validar credenciales busca en la BD si hay usuarios registrados. Si encuentra un usuario con el mismo nombre y contraseña, devuelve ese usuario. 
-    const usuarioValido = validarCredenciales(usuario, password);
-
-    if (usuarioValido) {
-        mostrarBienvenida(usuarioValido.nombre);
-        limpiarFormulario();
-        intentos = 0;
-    } else {
-        intentos++;
-
-        if (intentos < maxIntentos) {
-            mostrarIntento(intentos, maxIntentos);
-        } else {
-            bloqueado = true;
-            mostrarBloqueo();
-        }
-    }
-}
 
 // ========== FUNCIONES DE MOSTRAR RESULTADOS ==========
 // estas funciones se encargan de mostrar mensajes de error, éxito, bienvenida, advertencia y bloqueo en el área de resultados.
@@ -160,18 +121,6 @@ function mostrarExito(nombre, usuario, email) {
   `;
     areaResultados.appendChild(div);
     console.log(`✅ Usuario ${usuario} registrado exitosamente`);
-}
-
-function mostrarBienvenida(nombre) {
-    const div = document.createElement('div');
-    div.className = 'resultado bienvenida';
-    div.innerHTML = `
-    <h2>🎉 ¡Bienvenido al sistema!</h2>
-    <p>Hola <strong>${nombre}</strong>, tu sesión ha sido iniciada correctamente.</p>
-    <p style="color: green; margin-top: 10px;">Acceso garantizado al sistema Aguas Paraíso</p>
-  `;
-    areaResultados.appendChild(div);
-    console.log(`¡Bienvenido al sistema, ${nombre}!`);
 }
 
 function mostrarIntento(intento, max) {
@@ -213,7 +162,6 @@ function limpiarFormulario() {
     registroForm.reset(); /* limpia el formulario */
     inputNombre.focus(); /* pone el foco en el campo de nombre para facilitar el registro o login */
 }
-
 // ========== EVENTO DEL BOTÓN ==========
 btnRegistrarse.addEventListener('click', () => {
     // Verificar si es un registro o login

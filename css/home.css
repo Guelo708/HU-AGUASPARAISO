@@ -1,18 +1,18 @@
-/* ======== Estilos generales ======== */
+/* estilos.css */
+
 body {
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  background-color: #0033A0; /* azul profundo de tu paleta */
+  background-color: #4EC3E0;
   color: #FFFFFF;
 }
 
-/* ======== Header y navegación ======== */
 header {
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
-  background-color: #00AEC7; /* turquesa intenso */
+  background-color: #00AEC7;
 }
 
 .navbar {
@@ -47,9 +47,8 @@ header {
 }
 
 .nav-menu a.active {
-  background-color: #FFE946;
-  color: #0033A0;
-  font-weight: bold;
+  background-color: #4EC3E0;
+  color: #FFFFFF;
 }
 
 .nav-menu a.destacado {
@@ -58,23 +57,13 @@ header {
   font-weight: bold;
 }
 
-/* ======== Contenido principal ======== */
 main.contenido {
-  margin-top: 80px;
-  padding: 40px;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: #FFFFFF;
-  color: #0033A0;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  margin-top: 70px;
 }
 
-/* ======== Hero con parallax ======== */
 .hero {
   height: 500px;
-  background-image: url('https://pxhere.com/es/photo/1606595');
+  background-image: url('/img/imagen1 .png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -101,44 +90,24 @@ main.contenido {
   font-size: 1.2em;
 }
 
-/* ======== Formularios ======== */
-form label {
-  display: block;
-  margin-top: 20px;
-  font-weight: bold;
-}
-
-form input,
-form select,
-form button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-form button {
-  background-color: #00AEC7;
+.footer {
+  background-color: #001f5c;
   color: #FFFFFF;
-  font-weight: bold;
-  margin-top: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  border: none;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.95em;
 }
 
-form button:hover {
-  background-color: #007a99;
+.footer a {
+  color: #E3E829;
+  text-decoration: none;
 }
 
-.success {
-  margin-top: 20px;
-  color: green;
-  font-weight: bold;
+.footer a:hover {
+  text-decoration: underline;
 }
+/* Estilo para tabla de facturas con más contraste */
 
-/* ======== Tablas de facturas ======== */
 .tabla-facturas {
   width: 100%;
   border-collapse: collapse;
@@ -190,8 +159,6 @@ form button:hover {
   border-radius: 5px;
   padding: 5px;
 }
-
-/* ======== Autenticación y panel admin ======== */
 .auth {
   margin-top: 30px;
   background-color: #FFFFFF;
@@ -267,78 +234,4 @@ form button:hover {
 .card button:hover {
   background-color: #4EC3E0;
   color: #0033A0;
-}
-
-/* ======== Footer ======== */
-.footer {
-  background-color: #001f5c;
-  color: #FFFFFF;
-  text-align: center;
-  padding: 20px;
-  font-size: 0.95em;
-}
-
-.footer a {
-  color: #E3E829;
-  text-decoration: none;
-}
-
-.footer a:hover {
-  text-decoration: underline;
-}
-.filtros {
-  margin-bottom: 20px;
-  background-color: #FFFFFF;
-  color: #0033A0;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-.filtros form {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.filtros label {
-  font-weight: bold;
-}
-
-.filtros input, .filtros select, .filtros button {
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-.filtros button {
-  background-color: #00AEC7;
-  color: #FFFFFF;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.filtros button:hover {
-  background-color: #007a99;
-}
-
-#exportarBtn {
-  margin-top: 20px;
-  background-color: #E3E829;
-  color: #0033A0;
-  font-weight: bold;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#exportarBtn:hover {
-  background-color: #FFE946;
-}
-
-#mensajeExport {
-  margin-top: 15px;
-  font-weight: bold;
 }

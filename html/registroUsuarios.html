@@ -4,9 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registro - Aguas Paraíso</title>
-  <link rel="stylesheet" href="/stylesUsuarios.css">
+  <link rel="stylesheet" href="/css/registroUsuarios.css">
+  <link rel="stylesheet" href="/css/home.css">
 </head>
 <body>
+  <header>
+    <nav class="navbar">
+      <ul class="nav-menu">
+        <li><a href="/html/home.html" class="active">Inicio</a></li>
+        <li><a href="/html/usuarios.html">Usuarios</a></li>
+        <li><a href="/html/pagos.html">Pagos</a></li>
+        <li><a href="/html/factura.html">Facturas</a></li>
+        <li><a href="/html/registroUsuarios.html" class="destacado">Registro Usuarios</a></li>
+        <li><a href="/html/inicioSesion.html" class="destacado">Inicio de sesión</a></li>
+      </ul>
+    </nav>
+  </header>
   <form id="registroForm">
     <label for="nombre">Nombre completo</label>
     <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required>
@@ -26,6 +39,6 @@
   <!-- Área de resultados -->
   <div id="resultados"></div>
 
-  <script src="registro.js"></script>
+  <script src="/javascript/registroUsuarios.js"></script>
 </body>
 </html>

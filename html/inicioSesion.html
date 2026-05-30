@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aguas Paraiso</title>
+  <link rel="stylesheet" href="/css/inicioSesion.css">
+  <link rel="stylesheet" href="/css/home.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <ul class="nav-menu">
+        <li><a href="/html/home.html" class="active">Inicio</a></li>
+        <li><a href="/html/usuarios.html">Usuarios</a></li>
+        <li><a href="/html/pagos.html">Pagos</a></li>
+        <li><a href="/html/factura.html">Facturas</a></li>
+        <li><a href="/html/registroUsuarios.html" class="destacado">Registro Usuarios</a></li>
+        <li><a href="/html/inicioSesion.html" class="destacado">Inicio de sesión</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <form action="">
+    
+    <h1>Regístrese para pagar su factura</h1>
+
+    <label for="usuario">Usuario</label>
+    <input id="usuario" placeholder="Usuario" type="text">
+
+    <label for="clave">Contraseña</label>
+    <input id="clave" placeholder="Contraseña" type="password">
+    <br>
+    <!-- Área para mensajes dinámicos -->
+    <div id="mensaje"></div>
+
+    <input class="boton" type="button" value="Iniciar Sesión" />
+  </form>
+</body>
+<script type="module" src="/javascript/inicioSesion.js"></script>
+
+</html>
