@@ -91,4 +91,46 @@ cardBack.appendChild(correo);
 
 document.getElementById("btnCargar").addEventListener("click", cargarUsuarios);
 
+async function actualizarUsuario() {
+  const resultado = document.getElementById("resultado");
+  resultado.innerHTML = "Actualizando usuario...";
+
+  try {
+    // ID del usuario a actualizar (ejemplo: 1)
+    const idUsuario = 1;
+
+    // Datos nuevos
+    const datosActualizados = {
+      nombre: "Usuario Actualizado",
+      correo: "nuevo_correo@example.com"
+    };
+
+    // Llamada PUT a la API
+    const respuesta = await fetch(`https://6a13aada6c7db8aac0534233.mockapi.io/api/v1/usuarios/${idUsuario}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(datosActualizados)
+    });
+
+    if (!respuesta.ok) throw new Error("Error al actualizar usuario");
+
+    const usuarioActualizado = await respuesta.json();
+
+    // Mostrar resultado en pantalla
+    resultado.innerHTML = `
+      <p>Usuario actualizado correctamente:</p>
+      <p>ID: ${usuarioActualizado.id}</p>
+      <p>Nombre: ${usuarioActualizado.nombre}</p>
+      <p>Correo: ${usuarioActualizado.correo}</p>
+    `;
+
+  } catch (error) {
+    resultado.innerHTML = "No se pudo actualizar el usuario.";
+    console.error(error);
+  }
+}
+
+document.getElementById("btnActualizar").addEventListener("click", actualizarUsuario);
+
+
 

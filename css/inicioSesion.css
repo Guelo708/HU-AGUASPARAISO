@@ -60,3 +60,24 @@ input{
 #mensaje.blocked {
   color: red;
 }
+
+.alerta-suave {
+  margin-top: 8px;
+  padding: 10px;
+  background-color: #f0f0f0;   /* fondo gris claro */
+  border: 1px solid #ccc;      /* borde suave */
+  border-radius: 5px;          /* esquinas redondeadas */
+  font-size: 14px;
+  color: #031743;              /* tono azul oscuro de tu paleta */
+  text-align: center;
+}
+
+.aviso {
+  margin-top: 40px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #0033A0;             /* azul de tu paleta */
+  text-align: center;
+  background: none;           /* sin fondo */
+  border: none;               /* sin borde */
+}
