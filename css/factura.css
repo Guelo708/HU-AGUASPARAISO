@@ -113,3 +113,22 @@ form button:hover {
 .footer a:hover {
   text-decoration: underline;
 }
+#btnGenerar {
+    display: block;
+    margin: 20px auto 0 auto;
+    background-color: #0033A0; /* azul institucional */
+    color: #FFFFFF;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px; /* bordes redondeados */
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    transition: background-color 0.3s, transform 0.2s;
+}
+#btnGenerar:hover {
+    background-color: #FFFFFF; /* celeste institucional */
+    color: #0033A0;            /* texto azul */
+    transform: scale(1.05);    /* efecto de “levantar” */
+}

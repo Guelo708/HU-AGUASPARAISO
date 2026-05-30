@@ -3,7 +3,12 @@ const contraseñaCorrecta = "guelo708";
 
 let intentos = 0;
 
+<<<<<<< HEAD:scriptFormularioPagos.js
 const botonLogin = document.querySelector(".boton");
+=======
+// Referencias al DOM
+const botonLogin = document.querySelector("#btnLogin");
+>>>>>>> 427f99659727ca2aa5c355e608815f4a7e0ba64d:javascript/inisioSesion.js
 const campoUsuario = document.getElementById("usuario");
 const campoClave = document.getElementById("clave");
 const mensaje = document.getElementById("mensaje");
