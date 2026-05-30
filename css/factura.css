@@ -3,6 +3,10 @@ body {
   margin: 0;
   background-color: #0033A0;
   color: #FFFFFF;
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
@@ -40,26 +44,30 @@ header {
 }
 
 .nav-menu a:hover {
-  background-color: #4EC3E0;
+  background-color: #E3E829;
   color: #0033A0;
 }
 
-.nav-menu a.active {
-  background-color: #FFE946;
-  color: #0033A0;
-  font-weight: bold;
-}
+
 
 main.contenido {
-  margin-top: 80px;
+  flex: 1;
+
+  margin-top: 100px;
+  margin-bottom: 40px;
+
   padding: 40px;
-  max-width: 600px;
+  max-width: 700px;
+  width: 90%;
+
   margin-left: auto;
   margin-right: auto;
+
   background-color: #FFFFFF;
   color: #0033A0;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 }
 
 form label {
@@ -128,7 +136,7 @@ form button:hover {
     transition: background-color 0.3s, transform 0.2s;
 }
 #btnGenerar:hover {
-    background-color: #FFFFFF; /* celeste institucional */
+    background-color: #E3E829; /* celeste institucional */
     color: #0033A0;            /* texto azul */
     transform: scale(1.05);    /* efecto de “levantar” */
 }
