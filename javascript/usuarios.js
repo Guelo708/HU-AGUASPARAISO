@@ -2,7 +2,6 @@ async function cargarUsuarios() {
   const resultado = document.getElementById("resultado");
   resultado.innerHTML = "Cargando...";
 
-
   try {
     const respuesta = await fetch("https://6a13aada6c7db8aac0534233.mockapi.io/api/v1/usuarios");
     if (!respuesta.ok) throw new Error("Error en la solicitud");
@@ -10,78 +9,93 @@ async function cargarUsuarios() {
     const datos = await respuesta.json();
     resultado.innerHTML = "";
 
-// Validar si hay datos
-if (datos.length === 0) {
-  const mensaje = document.createElement("p");
-  mensaje.textContent = "No hay usuarios disponibles en este momento";
-  
-  // Escoge la clase según el color que quieras
-  //mensaje.classList.add("vacio-blanco");   // texto blanco
-   mensaje.classList.add("vacio-amarillo"); // texto amarillo
-  
-  resultado.appendChild(mensaje);
+    // Validar si hay datos
+    if (datos.length === 0) {
+      const mensaje = document.createElement("p");
+      mensaje.textContent = "No hay usuarios disponibles en este momento";
+      mensaje.classList.add("vacio-amarillo"); 
+      resultado.appendChild(mensaje);
 
-} else {
+    } else {
+      datos.forEach(usuario => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.setAttribute("data-id", usuario.id);
 
-datos.forEach(usuario => {
-  const card = document.createElement("div");
-  card.classList.add("card");
+        const cardInner = document.createElement("div");
+        cardInner.classList.add("card-inner");
 
-  const cardInner = document.createElement("div");
-  cardInner.classList.add("card-inner");
+        // Frente
+        const cardFront = document.createElement("div");
+        cardFront.classList.add("card-front");
 
-  // Frente
-  const cardFront = document.createElement("div");
-  cardFront.classList.add("card-front");
+        const img = document.createElement("img");
+        img.src = usuario.avatar;
+        img.alt = usuario.nombre;
 
-  const img = document.createElement("img");
-  img.src = usuario.avatar;
-  img.alt = usuario.nombre;
+        const nombre = document.createElement("h3");
+        nombre.textContent = usuario.nombre;
 
-  const nombre = document.createElement("h3");
-  nombre.textContent = usuario.nombre;
+        // Botones de acción
+        const acciones = document.createElement("div");
+        acciones.classList.add("acciones");
 
-  cardFront.appendChild(img);
-  cardFront.appendChild(nombre);
+        const btnActualizar = document.createElement("button");
+        btnActualizar.textContent = "Actualizar";
+        btnActualizar.classList.add("btnActualizar");
 
+        const btnEliminar = document.createElement("button");
+        btnEliminar.textContent = "Eliminar";
+        btnEliminar.classList.add("btnEliminar");
 
-// Reverso
-const cardBack = document.createElement("div");
-cardBack.classList.add("card-back");
+        acciones.appendChild(btnActualizar);
+        acciones.appendChild(btnEliminar);
 
-// Nombre completo
-const nombreCompleto = document.createElement("p");
-nombreCompleto.innerHTML = `<span class="label">Nombre completo:</span> <span class="valor">${usuario.nombre}</span>`;
+        cardFront.appendChild(img);
+        cardFront.appendChild(nombre);
+        cardFront.appendChild(acciones);
 
-// Celular
-const celular = document.createElement("p");
-celular.classList.add("celular");
-celular.innerHTML = `<span class="label">Celular:</span> <span class="valor">${usuario.celular}</span>`;
+        // Reverso
+        const cardBack = document.createElement("div");
+        cardBack.classList.add("card-back");
 
-// Correo
-const correo = document.createElement("p");
-correo.classList.add("correo");
-correo.innerHTML = `<span class="label">Correo:</span> <span class="valor">${usuario.correo}</span>`;
+        const nombreCompleto = document.createElement("p");
+        nombreCompleto.innerHTML = `<span class="label">Nombre completo:</span> <span class="valor">${usuario.nombre}</span>`;
 
-cardBack.appendChild(nombreCompleto);
-cardBack.appendChild(celular);
-cardBack.appendChild(correo);
+        const celular = document.createElement("p");
+        celular.classList.add("celular");
+        celular.innerHTML = `<span class="label">Celular:</span> <span class="valor">${usuario.celular}</span>`;
 
+        const correo = document.createElement("p");
+        correo.classList.add("correo");
+        correo.innerHTML = `<span class="label">Correo:</span> <span class="valor">${usuario.correo}</span>`;
 
-  // Ensamblar tarjeta
-  cardInner.appendChild(cardFront);
-  cardInner.appendChild(cardBack);
-  card.appendChild(cardInner);
+        cardBack.appendChild(nombreCompleto);
+        cardBack.appendChild(celular);
+        cardBack.appendChild(correo);
 
-  // Evento de clic para girar
-  card.addEventListener("click", () => {
+        // Ensamblar tarjeta
+        cardInner.appendChild(cardFront);
+        cardInner.appendChild(cardBack);
+        card.appendChild(cardInner);
+
+     
+        // Evento de clic para girar
+card.addEventListener("click", (e) => {
+  // Evita que los botones disparen el flip
+  if (!e.target.classList.contains("btnActualizar") && !e.target.classList.contains("btnEliminar")) {
     card.classList.toggle("flipped");
-  });   
+  }
 
-  resultado.appendChild(card);
-});
+        });
 
-}
+        // Eventos de acción
+        btnActualizar.addEventListener("click", () => mostrarFormularioActualizar(usuario));
+        btnEliminar.addEventListener("click", () => eliminarUsuario(usuario.id));
+
+        resultado.appendChild(card);
+      });
+    }
 
   } catch (error) {
     resultado.innerHTML = "No se pudieron cargar los datos. Intenta más tarde.";
@@ -91,46 +105,75 @@ cardBack.appendChild(correo);
 
 document.getElementById("btnCargar").addEventListener("click", cargarUsuarios);
 
-async function actualizarUsuario() {
-  const resultado = document.getElementById("resultado");
-  resultado.innerHTML = "Actualizando usuario...";
+// --- NUEVAS FUNCIONES ---
 
-  try {
-    // ID del usuario a actualizar (ejemplo: 1)
-    const idUsuario = 1;
+function mostrarFormularioActualizar(usuario) {
+  const contenedor = document.getElementById("contenedorAcciones");
+  contenedor.innerHTML = `
+    <h3>Actualizar Usuario</h3>
+    <form id="formActualizar">
+      <input type="hidden" id="idUsuario" value="${usuario.id}">
+      <label>Nombre:</label>
+      <input type="text" id="nuevoNombre" value="${usuario.nombre}">
+      <label>Correo:</label>
+      <input type="email" id="nuevoCorreo" value="${usuario.correo}">
+      <label>Celular:</label>
+      <input type="text" id="nuevoCelular" value="${usuario.celular}">
+      <button type="submit">Guardar cambios</button>
+    </form>
+  `;
 
-    // Datos nuevos
-    const datosActualizados = {
-      nombre: "Usuario Actualizado",
-      correo: "nuevo_correo@example.com"
-    };
+  console.log("Formulario de actualización renderizado para:", usuario);
 
-    // Llamada PUT a la API
-    const respuesta = await fetch(`https://6a13aada6c7db8aac0534233.mockapi.io/api/v1/usuarios/${idUsuario}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(datosActualizados)
-    });
+  // Capturar el formulario recién creado
+  const form = document.getElementById("formActualizar");
 
-    if (!respuesta.ok) throw new Error("Error al actualizar usuario");
+  // Enganchar el evento de submit
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault(); // evita reload
 
-    const usuarioActualizado = await respuesta.json();
+    console.log("Submit detectado, enviando PUT...");
 
-    // Mostrar resultado en pantalla
-    resultado.innerHTML = `
-      <p>Usuario actualizado correctamente:</p>
-      <p>ID: ${usuarioActualizado.id}</p>
-      <p>Nombre: ${usuarioActualizado.nombre}</p>
-      <p>Correo: ${usuarioActualizado.correo}</p>
-    `;
+    try {
+      const respuesta = await fetch(`https://6a13aada6c7db8aac0534233.mockapi.io/api/v1/usuarios/${usuario.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nombre: document.getElementById("nuevoNombre").value,
+          correo: document.getElementById("nuevoCorreo").value,
+          celular: document.getElementById("nuevoCelular").value
+        })
+      });
 
-  } catch (error) {
-    resultado.innerHTML = "No se pudo actualizar el usuario.";
-    console.error(error);
-  }
+      if (!respuesta.ok) throw new Error("Error en la actualización");
+
+      alert("Usuario actualizado correctamente");
+      cargarUsuarios(); // refresca la lista
+      contenedor.innerHTML = ""; // limpia el formulario
+    } catch (error) {
+      alert("Error al actualizar usuario");
+      console.error(error);
+    }
+  });
 }
 
-document.getElementById("btnActualizar").addEventListener("click", actualizarUsuario);
+
+
+
+async function eliminarUsuario(id) {
+  if (confirm("¿Seguro que deseas eliminar este usuario?")) {
+    try {
+      await fetch(`https://6a13aada6c7db8aac0534233.mockapi.io/api/v1/usuarios/${id}`, {
+        method: "DELETE"
+      });
+      alert("Usuario eliminado correctamente");
+      cargarUsuarios();
+    } catch (error) {
+      alert("Error al eliminar usuario");
+      console.error(error);
+    }
+  }
+}
 
 
 
