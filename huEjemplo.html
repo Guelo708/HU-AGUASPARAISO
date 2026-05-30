@@ -39,7 +39,7 @@
     const successMessage = document.getElementById('successMessage');
 
     // Simulación de correos ya registrados
-    const correosRegistrados = ['admin@aguasparaiso.com', 'usuario@aguasparaiso.com'];
+    const correosRegistrados = [' @aguasparaiso.com', 'usuario@aguasparaiso.com'];
 
     form.addEventListener('submit', function(event) {
       event.preventDefault();
@@ -50,7 +50,7 @@
         successMessage.textContent = '';
       } else {
         emailError.style.display = 'none';
-        successMessage.textContent = '✅ Usuario creado exitosamente.';
+        successMessage.textContent = ' Usuario creado exitosamente.';
         form.reset();
       }
     });
