@@ -1,215 +1,212 @@
-// Seleccionar elementos del DOM
-const registroForm = document.getElementById('registroForm');
-const inputNombre = document.getElementById('nombre');
-const inputEmail = document.getElementById('email');
-const inputUsuario = document.getElementById('usuario');
-const inputPassword = document.getElementById('password');
-const btnRegistrarse = document.getElementById('btnRegistrarse');
-const areaResultados = document.getElementById('resultados');
 
-// Base de datos de usuarios existentes
-const usuariosRegistrados = [
-    { usuario: 'jhordan', password: '123456', nombre: 'Jhordan', email: 'jhordan@gmail.com' },
-    { usuario: 'admin', password: 'admin123', nombre: 'Administrador', email: 'admin@aguasparaiso.com' },
-    { usuario: 'test', password: 'test123', nombre: 'Usuario Test', email: 'test@aguasparaiso.com' }
-];
+// esta es la tabla donde se registran los usuarios
+const API_URL =
+    "https://6a13aada6c7db8aac0534233.mockapi.io/api/v1/usuarios";
 
-// array para almacenar nuevos usuarios registrados durante la sesión
-let usuariosNuevos = [];
+const idUsuario = document.getElementById("idUsuario");
+const nombre = document.getElementById("nombre");
+const celular = document.getElementById("celular");
+const email = document.getElementById("email");
 
-// Variable para controlar intentos
-let intentos = 0;
-const maxIntentos = 3;
-let bloqueado = false;
+const btnGuardar = document.getElementById("btnGuardar");
+const btnActualizar = document.getElementById("btnActualizar");
+const btnEliminar = document.getElementById("btnEliminar");
 
-// FUNCIÓN DE VALIDACIÓN DE CREDENCIALES
-// esta funcion se encarga de verificar si el usuario y contraseña ingresados coinciden con algún usuario registrado en la base de datos (usuariosRegistrados).
-function validarCredenciales(usuario, password) {
-    const usuarioExistente = usuariosRegistrados.find(u => u.usuario === usuario && u.password === password);
-    return usuarioExistente;
+const tablaUsuarios =
+    document.getElementById("tablaUsuarios");
+
+async function obtenerUsuarios() {
+
+    try {
+
+        const response =
+            await fetch(API_URL);
+
+        const usuarios =
+            await response.json();
+
+        tablaUsuarios.innerHTML = "";
+
+        usuarios.forEach(usuario => {
+
+            tablaUsuarios.innerHTML += `
+            <tr>
+
+                <td>${usuario.id}</td>
+
+                <td>${usuario.nombre}</td>
+
+                <td>${usuario.celular}</td>
+
+                <td>${usuario.correo}</td>
+
+                <td>
+
+                    <button
+                    onclick="seleccionarUsuario(
+                    '${usuario.id}',
+                    '${usuario.nombre}',
+                    '${usuario.celular}',
+                    '${usuario.correo}'
+                    )">
+
+                    Seleccionar
+
+                    </button>
+
+                </td>
+
+            </tr>
+            `;
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
 }
 
-// FUNCIÓN DE VALIDAR EMAIL (regex para formato de email, que no tenga espacios, tenga un @ y .)
-function validarEmail(email) {
-    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regexEmail.test(email);
-}
+btnGuardar.addEventListener("click", async () => {
 
-// FUNCIÓN DE VALIDAR CONTRASEÑA 
-function validarPassword(password) {
-    return password.length >= 6;
-}
-
-// ========== FUNCIÓN DE REGISTRO ==========
-function procesarRegistro() {
-    // borra los campos una vez que se procesa el registro 
-    areaResultados.innerHTML = '';
-
-    // Obtener valores de los elementos del DOM y eliminar espacios con trim
-    const nombre = inputNombre.value.trim();
-    const email = inputEmail.value.trim();
-    const usuario = inputUsuario.value.trim();
-    const password = inputPassword.value.trim();
-
-    // Validar que no estén vacíos (!not) 
-    if (!nombre || !email || !usuario || !password) {
-        mostrarError('Por favor, completa todos los campos');
-        return;
-    }
-
-    // Validar email
-    if (!validarEmail(email)) {
-        mostrarError('El correo electrónico no es válido');
-        return;
-    }
-
-    // Validar contraseña
-    if (!validarPassword(password)) {
-        mostrarError('La contraseña debe tener al menos 6 caracteres');
-        return;
-    }
-
-    // Validar que el usuario no exista en la base de datos (usuariosRegistrados) o en los nuevos usuarios (some devuelve true si encuentra un usuario con el mismo nombre)
-    const usuarioYaExiste = usuariosRegistrados.some(u => u.usuario === usuario) || usuariosNuevos.some(u => u.usuario === usuario);
-
-    if (usuarioYaExiste) {
-        mostrarError('El usuario ya existe. Por favor, elige otro');
-        return;
-    }
-
-    // Si todo es válido, crear el nuevo usuario
     const nuevoUsuario = {
-        usuario,
-        password,
-        nombre,
-        email
+        nombre: nombre.value,
+        celular: celular.value,
+        correo: email.value,
+        avatar: `https://api.dicebear.com/7.x/personas/svg?seed=${nombre.value}`
     };
 
-    // agregamos el nuevo usuario al array de usuarios nuevos y a la base de datos de usuarios registrados
-    usuariosNuevos.push(nuevoUsuario);
-    usuariosRegistrados.push(nuevoUsuario);
+    try {
 
-    // Mostrar mensaje de éxito con los datos del nuevo usuario
-    mostrarExito(nombre, usuario, email);
-    limpiarFormulario();
-}
+        await fetch(API_URL, {
 
+            method: "POST",
 
+            headers: {
+                "Content-Type": "application/json"
+            },
 
-// ========== FUNCIONES DE MOSTRAR RESULTADOS ==========
-// estas funciones se encargan de mostrar mensajes de error, éxito, bienvenida, advertencia y bloqueo en el área de resultados.
+            body: JSON.stringify(nuevoUsuario)
 
-function mostrarError(mensaje) {
-    // muestra erroe en el área de resultados y también lo imprime en la consola como error
-    const div = document.createElement('div'); /* crea el elemento div */
-    div.className = 'resultado error'; /* asigna la clase de estilo */
-    div.textContent = `❌ ${mensaje}`; /* agrega el texto al mensaje */
-    areaResultados.appendChild(div); /* agrega el elemento al área de resultados */
-    console.error(mensaje); /* imprime el error en la consola */
-}
+        });
 
-function mostrarExito(nombre, usuario, email) {
-    const div = document.createElement('div');
-    div.className = 'resultado exito';
-    /* el innerHTML permite meter codigo html */
-    div.innerHTML = `
-    <h3>✅ ¡Registro exitoso!</h3>
-    <p><strong>Nombre:</strong> ${nombre}</p>
-    <p><strong>Usuario:</strong> ${usuario}</p>
-    <p><strong>Email:</strong> ${email}</p>
-    <p style="color: green; margin-top: 10px;">Puedes iniciar sesión con tu usuario y contraseña</p>
-  `;
-    areaResultados.appendChild(div);
-    console.log(`✅ Usuario ${usuario} registrado exitosamente`);
-}
-
-function mostrarIntento(intento, max) {
-    const div = document.createElement('div');
-    div.className = 'resultado advertencia';
-    div.innerHTML = `
-    <p>⚠️ Datos incorrectos. Intento ${intento} de ${max}.</p>
-    <p style="color: orange;">Te quedan ${max - intento} intento(s)</p>
-  `;
-    areaResultados.appendChild(div);
-    console.warn(`Intento ${intento} de ${max} - Credenciales incorrectas`);
-}
-
-function mostrarBloqueo() {
-    const div = document.createElement('div');
-    div.className = 'resultado bloqueado';
-    div.innerHTML = `
-    <h3>🔒 Usuario bloqueado</h3>
-    <p>Ha superado el número máximo de intentos (${maxIntentos}).</p>
-    <p style="color: red; margin-top: 10px;">Por seguridad, tu cuenta ha sido bloqueada.</p>
-    <button id="btnDesbloquear" style="margin-top: 10px; padding: 8px 15px; background: #0066cc; color: white; border: none; border-radius: 4px; cursor: pointer;">
-      Desbloquear
-    </button>
-  `;
-    areaResultados.appendChild(div);
-    console.error('Usuario bloqueado. Ha superado el número de intentos.');
-
-    // Evento para desbloquear
-    document.getElementById('btnDesbloquear').addEventListener('click', () => {
-        bloqueado = false;
-        intentos = 0;
         limpiarFormulario();
-        areaResultados.innerHTML = '';
-        console.log('Cuenta desbloqueada. Puedes intentar nuevamente');
-    });
-}
+
+        obtenerUsuarios();
+
+        alert("Usuario registrado");
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+
+});
+
+btnActualizar.addEventListener("click", async () => {
+
+    if (!idUsuario.value) {
+
+        alert("Seleccione un usuario");
+
+        return;
+    }
+
+    const usuarioActualizado = {
+
+        nombre: nombre.value,
+        celular: celular.value,
+        correo: email.value
+
+    };
+
+    try {
+
+        await fetch(
+            `${API_URL}/${idUsuario.value}`,
+            {
+
+                method: "PUT",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(
+                    usuarioActualizado
+                )
+
+            });
+
+        limpiarFormulario();
+
+        obtenerUsuarios();
+
+        alert("Usuario actualizado");
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+
+});
+
+btnEliminar.addEventListener("click", async () => {
+
+    if (!idUsuario.value) {
+
+        alert("Seleccione un usuario");
+
+        return;
+    }
+
+    const confirmar =
+        confirm(
+            "¿Desea eliminar este usuario?"
+        );
+
+    if (!confirmar) return;
+
+    try {
+
+        await fetch(
+            `${API_URL}/${idUsuario.value}`,
+            {
+                method: "DELETE"
+            });
+
+        limpiarFormulario();
+
+        obtenerUsuarios();
+
+        alert("Usuario eliminado");
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+
+});
 
 function limpiarFormulario() {
-    registroForm.reset(); /* limpia el formulario */
-    inputNombre.focus(); /* pone el foco en el campo de nombre para facilitar el registro o login */
+
+    idUsuario.value = "";
+    nombre.value = "";
+    celular.value = "";
+    email.value = "";
+
 }
-// ========== EVENTO DEL BOTÓN ==========
-btnRegistrarse.addEventListener('click', () => {
-    // Verificar si es un registro o login
-    if (inputNombre.value.trim() && inputEmail.value.trim()) {
-        // Si hay nombre y email, es un registro
-        procesarRegistro();
-    } else {
-        // Si no, es un login
-        procesarLogin();
-    }
-});
 
-// ========== EVENTO PARA TECLA ENTER ==========
-registroForm.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        e.preventDefault();
-        btnRegistrarse.click();
-    }
-});
+function seleccionarUsuario(id, nombreUsuario, celularUsuario, correoUsuario) {
 
-// ========== EVENTOS DE VALIDACIÓN EN TIEMPO REAL ==========
-inputNombre.addEventListener('input', (e) => {
-    if (e.target.value.length > 0 && e.target.value.length < 3) {
-        console.log('El nombre debe tener al menos 3 caracteres');
-    }
-});
+    idUsuario.value = id;
+    nombre.value = nombreUsuario;
+    celular.value = celularUsuario;
+    email.value = correoUsuario;
 
-inputEmail.addEventListener('change', (e) => {
-    if (e.target.value.trim() && !validarEmail(e.target.value.trim())) {
-        console.warn('Email inválido');
-    }
-});
+}
 
-inputPassword.addEventListener('input', (e) => {
-    if (e.target.value.length > 0 && e.target.value.length < 6) {
-        console.log('La contraseña debe tener al menos 6 caracteres');
-    }
-});
-
-// ========== MENSAJE INICIAL ==========
-window.addEventListener('load', () => {
-    const bienvenida = document.createElement('div');
-    bienvenida.className = 'resultado bienvenida-inicial';
-    bienvenida.innerHTML = `
-    <h2>👋 Bienvenido a Aguas Paraíso</h2>
-    <p>Completa el formulario para registrarte o ingresa tus credenciales para iniciar sesión</p>
-    <p style="font-size: 12px; color: #666; margin-top: 10px;">Usuarios de prueba: jhordan/123456, admin/admin123</p>
-  `;
-    areaResultados.appendChild(bienvenida);
-    console.log('✅ Script de registro cargado correctamente');
-});
+obtenerUsuarios();

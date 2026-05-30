@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Facturas</title>
+    <link rel="stylesheet" href="/css/ingresoFactura.css">
+    
+</head>
+<body>
+ <header>
+    <nav class="navbar">
+      <ul class="nav-menu">
+        <li><a href="/html/home.html" class="active">Inicio</a></li>
+        <li><a href="/html/usuarios.html">Usuarios</a></li>
+        <li><a href="/html/pagos.html">Pagos</a></li>
+        <li><a href="/html/factura.html">Facturas</a></li>
+        <li><a href="/html/ingresoFactura.html">Ingreso Facturas</a></li>
+        <li><a href="/html/registroUsuarios.html" class="destacado">Registro Usuarios</a></li>
+        <!-- <li><a href="/html/inicioSesion.html" class="destacado">Inicio de sesión</a></li> -->
+      </ul>
+    </nav>
+  </header>
+    <div class="contenedor">
+
+        <h1>Registro de Facturas</h1>
+
+        <form id="facturaForm">
+
+            <input type="hidden" id="idFactura">
+
+            <div class="grupo">
+                <label>Fecha de emisión</label>
+                <input type="date" id="fecha" required>
+            </div>
+
+            <div class="grupo">
+                <label>Valor Total</label>
+                <input type="number" id="valorTotal" placeholder="Ingrese valor" required>
+            </div>
+
+            <div class="grupo">
+                <label>Estado</label>
+                <select id="estado" required>
+                    <option value="">Seleccione</option>
+                    <option value="Pagada">Pagada</option>
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Anulada">Anulada</option>
+                </select>
+            </div>
+
+            <div class="botones">
+                <button type="button" id="btnGuardar">
+                    Guardar
+                </button>
+
+                <button type="button" id="btnActualizar">
+                    Actualizar
+                </button>
+
+                <button type="button" id="btnEliminar">
+                    Eliminar
+                </button>
+            </div>
+
+        </form>
+
+        <h2>Listado de Facturas</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha</th>
+                    <th>Valor</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+
+            <tbody id="tablaFacturas">
+
+            </tbody>
+        </table>
+
+    </div>
+
+    <script src="/javascript/ingresoFactura.js"></script>
+
+</body>
+</html>

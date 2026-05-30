@@ -1,11 +1,19 @@
 body {
-    background-color: #007a99; /* fondo institucional */
-    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #42B8D5;
     margin: 0;
-    padding: 20px;
-    
-}
+    min-height: 100vh;
 
+    display: flex;
+    flex-direction: column;
+}
+main{
+    flex:1;
+}
+.contenido-pagos{
+    padding-top: 120px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
 /* Contenedor en grid flexible con separación uniforme */
 #resultadoPagos {
     display: grid;
@@ -100,13 +108,12 @@ body {
 }
 
 /* Estilo del título */
-.titulo-pagos {
-    text-align: center;
-    font-size: 28px;
-    color: #ffffff; /* amarillo */
-    margin-bottom: 20px;
-    font-weight: bold;
-    margin-top: 100px;
+.titulo-pagos{
+    text-align:center;
+    font-size:48px;
+    color:white;
+    font-weight:bold;
+    margin:0 0 30px 0;
 }
 
 /* Estilo del botón */
@@ -126,7 +133,8 @@ body {
 }
 
 .btn-cargar:hover {
-    background-color: #00AEC7; /* turquesa */
+    background-color: #FFE946; /* amarillo */
+    color: #0033A0;
     transform: scale(1.05); /* efecto de levantar */
 }
 

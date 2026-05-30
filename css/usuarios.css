@@ -1,10 +1,12 @@
-body {
-    background-color: #007a99; /* fondo institucional */
-    font-family: 'Segoe UI', Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
+body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    background:#42b8d6;
 }
-
+main{
+    flex:1;
+}
 /* Contenedor en grid flexible con separación moderada */
 #resultado {
     display: grid;
@@ -161,7 +163,7 @@ h1 {
 
 /* Hover del botón */
 #btnCargar:hover {
-    background-color: #FFFFFF; /* celeste institucional */
+    background-color: #E3E829; /* celeste institucional */
     color: #0033A0;            /* texto azul */
     transform: scale(1.05);    /* efecto de “levantar” */
 }
@@ -184,6 +186,19 @@ h1 {
 #resultado p.vacio-amarillo {
     color: #E3E829; /* amarillo institucional */
 }
+.footer {
+  background-color: #001f5c;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.95em;
+}
+
+.footer p {
+  color: #ffffff;
+  text-decoration: none;
+}
+
 
 /* Botones dentro de la tarjeta */
 .card-front .acciones {

@@ -1,0 +1,138 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#0033A0;
+    padding: 0;
+}
+
+.contenedor{
+    padding-top: 20px;
+    max-width:900px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+h1,h2{
+    text-align:center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    color:#2c3e50;
+}
+
+header {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  background-color: #00AEC7;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-menu li {
+  margin: 0;
+}
+
+.nav-menu a {
+  display: block;
+  padding: 15px 20px;
+  text-decoration: none;
+  color: #FFFFFF;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.nav-menu a:hover {
+  background-color: #FFE946;
+  color: #0033A0;
+}
+
+
+.grupo{
+    margin-bottom:15px;
+}
+
+label{
+    display:block;
+    margin-bottom:5px;
+    font-weight:bold;
+}
+
+input,
+select{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+.botones{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+}
+
+button{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    color:white;
+    font-weight:bold;
+}
+
+#btnGuardar{
+    background:#27ae60;
+}
+
+#btnActualizar{
+    background:#f39c12;
+}
+
+#btnEliminar{
+    background:#e74c3c;
+}
+
+table{
+    width:100%;
+    margin-top:20px;
+    border-collapse:collapse;
+}
+
+table th,
+table td{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:center;
+}
+
+table th{
+    background:#0033A0;
+    color:white;
+}
+
+.seleccionar{
+    background:#3498db;
+    color:white;
+    border:none;
+    padding:5px 10px;
+}

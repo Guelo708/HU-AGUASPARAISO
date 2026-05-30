@@ -3,6 +3,11 @@ const url = "https://6a190f75489e471575196864.mockapi.io/api/v1/Facturas";
 const cardsContainer = document.querySelector("#cards");
 const btnGenerar = document.querySelector("#btnGenerar");
 
+
+const botonLimpiarTodo = document.querySelector('#btn-limpiar-todo')
+const botonCargar = document.querySelector('#btn-cargar')
+
+
 const formatoCOP = new Intl.NumberFormat("es-CO", {
   style: "currency",
   currency: "COP",
